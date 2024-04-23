@@ -8,14 +8,14 @@ RUN npm install -g @angular/cli
 # COPY package.json package-lock.json ./
 # RUN npm ci
 
-COPY package.json ./
+COPY package.json .
 RUN npm i
 
-COPY . .
+COPY . /code
 
 # EXPOSE 4200
 
-CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--poll", "1000"]
 
 # FROM builder as dev-envs
 
