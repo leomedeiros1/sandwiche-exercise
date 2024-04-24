@@ -6,7 +6,7 @@ services:
             - ./server/src:/code/src
             - .env:/code/.env
         environment:
-            - NODE_ENV=production
+            - NODE_ENV=development
             # PG_PASSWORD: /run/secrets/db_password
         env_file:
             - .env
