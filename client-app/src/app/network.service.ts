@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
+import { Access } from './models/access.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class NetworkService {
 
   getValues() {
     console.log("GETTING VALUES")
-    return this.http.get<Number[]>(`${this.configUrl}/teste`);
+    return this.http.get<Access[]>(`${this.configUrl}/api/accesses/`);
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -41,7 +41,7 @@ async function createTableAccesses() {
         CREATE TABLE IF NOT EXISTS accesses 
         (
             access_id SERIAL PRIMARY KEY,
-            access_datetime TIMESTAMP,
+            access_date DATE DEFAULT CURRENT_DATE,
             access_link_fk INT REFERENCES links (link_id)
         );
     `
