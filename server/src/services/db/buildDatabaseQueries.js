@@ -41,8 +41,8 @@ async function createTableAccesses() {
         CREATE TABLE IF NOT EXISTS accesses 
         (
             access_id SERIAL PRIMARY KEY,
-            access_date DATE DEFAULT CURRENT_DATE,
-            access_link_fk INT REFERENCES links (link_id)
+            access_date DATE NOT NULL DEFAULT CURRENT_DATE,
+            access_link_fk INT NOT NULL REFERENCES links (link_id)
         );
     `
     /*
@@ -51,13 +51,3 @@ async function createTableAccesses() {
     */
     return execQuery(CREATE_ACCESSES_TABLE_SQL)
 }
-
-
-/*
-populate_db(start_date=new Date().setDate(new Date().getDate() - 30), end_date=new Date()){
-    while(start_date < end_date){
-        // insert
-        start_date.setDate(start_date.getDate()+1)
-    }
-}
-*/
