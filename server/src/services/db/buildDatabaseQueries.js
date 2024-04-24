@@ -1,21 +1,23 @@
+const { execQuery } = require(".");
+
 module.exports = {
-    createDatabaseTables: async (pool) => {
+    createDatabaseTables: async () => {
         try{
-            const resultLinks = await createTableLinks(pool);
+            const resultLinks = await createTableLinks();
             if (resultLinks.success) {
-                console.log('Table links created successfully');
+                console.log(`Table 'links' verified successfully`);
             } else {
                 throw new Error(`Error creating table links: ${resultLinks.message}`);
             }
 
-            const resultAccesses = await createTableAccesses(pool);
+            const resultAccesses = await createTableAccesses();
             if (resultAccesses.success) {
-                console.log('Table accesses created successfully');
+                console.log(`Table 'accesses' verified successfully`);
             } else {
                 throw new Error(`Error creating table links: ${resultAccesses.message}`);
             }
 
-            console.log('All tables created successfully');
+            console.log('All tables verified successfully');
         } catch (error) {
             console.error('Error creating tables:', error);
         }
@@ -23,8 +25,7 @@ module.exports = {
 
 }
 
-
-async function createTableLinks(pool) {
+async function createTableLinks() {
     const CREATE_LINKS_TABLE_SQL = `
         CREATE TABLE IF NOT EXISTS links 
         (
@@ -32,18 +33,10 @@ async function createTableLinks(pool) {
             link_name TEXT
         );
     `
-    const client = await pool.connect();
-    try {
-        const result = await client.query(CREATE_LINKS_TABLE_SQL);
-        return { success: true, message: 'Table links created successfully' };
-    } catch (error) {
-        return { success: false, message: 'Error creating table links', error };
-    } finally {
-        client.release();
-    }
+    return execQuery(CREATE_LINKS_TABLE_SQL)
 }
 
-async function createTableAccesses(pool) {
+async function createTableAccesses() {
     const CREATE_ACCESSES_TABLE_SQL = `
         CREATE TABLE IF NOT EXISTS accesses 
         (
@@ -52,23 +45,13 @@ async function createTableAccesses(pool) {
             access_link_fk INT REFERENCES links (link_id)
         );
     `
-    const client = await pool.connect();
-    try {
-        const result = await client.query(CREATE_ACCESSES_TABLE_SQL);
-        return { success: true, message: 'Table links created successfully' };
-    } catch (error) {
-        return { success: false, message: 'Error creating table links', error };
-    } finally {
-        client.release();
-    }
+    /*
+        access_os_fk 
+        access_browser_fk 
+    */
+    return execQuery(CREATE_ACCESSES_TABLE_SQL)
 }
 
-
-
-/*
-    access_os_fk 
-    access_browser_fk 
-*/
 
 /*
 populate_db(start_date=new Date().setDate(new Date().getDate() - 30), end_date=new Date()){
