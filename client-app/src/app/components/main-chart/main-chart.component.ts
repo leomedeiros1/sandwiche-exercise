@@ -51,7 +51,7 @@ export class MainChartComponent {
     console.log("Create chart: ", this.acessesDataDates, this.acessesDataCounts);
 
     this.chart = new Chart("MyChart", {
-      type: 'bar', //this denotes tha type of chart
+      type: 'line', //this denotes tha type of chart
       data: {// values on X-Axis
         labels: this.acessesDataDates.map((each: Date) => {
           console.log(each)
@@ -61,7 +61,9 @@ export class MainChartComponent {
           {
             label: "Acessos",
             data: this.acessesDataCounts,
-            backgroundColor: 'limegreen'
+            backgroundColor: 'limegreen',
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.2
           }  
         ]
       },
