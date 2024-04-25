@@ -56,7 +56,6 @@ async function getAllAccesses(req, res) {
     try {
         const resultQuery = await queryAllAccesses()
 
-        console.log(":: ", resultQuery.result.rows);
         if(resultQuery.success){
             return res.status(200).json( resultQuery.result.rows );
         } else{
