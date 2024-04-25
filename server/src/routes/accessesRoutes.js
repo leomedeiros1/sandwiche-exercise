@@ -7,7 +7,7 @@ const accessController = require('../controllers/accessesController');
 // Defina as rotas para operações relacionadas a Accesses
 router.post('/register', accessController.createAccess);
 router.get('/', accessController.getAllAccesses);
-router.post('/counts', accessController.getAccessCounts);
+router.post('/counts', accessController.getAccessesCounts);
 // router.post('/register', AccessesController.register);
 // router.put('/:id', AccessesController.update);
 

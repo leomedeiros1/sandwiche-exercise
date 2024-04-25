@@ -68,7 +68,7 @@ async function getAllAccesses(req, res) {
     }
 }
 
-async function queryAccessCounts(startDate = null, endDate = null) {
+async function queryAccessesCounts(startDate = null, endDate = null) {
     // Se não for fornecida uma data inicial, defina-a como 30 dias antes de hoje
     if (!startDate) {
         startDate = new Date();
@@ -82,26 +82,26 @@ async function queryAccessCounts(startDate = null, endDate = null) {
 
     const query = `
         SELECT 
-            acc.access_date AS access_day,
+            acc.access_date AS access_date,
             COUNT(*) AS access_count
         FROM 
             accesses acc
         WHERE 
             acc.access_date >= $1 AND acc.access_date <= $2
         GROUP BY 
-            access_day
+            access_date
         ORDER BY 
-            access_day;
+            access_date;
     `;
 
     return await execQuery(query, [startDate, endDate]);
 }
 
-async function getAccessCounts(req, res) {
+async function getAccessesCounts(req, res) {
     try {
         const { start_date, end_date } = req.body;
 
-        const resultQuery = await queryAccessCounts(start_date, end_date);
+        const resultQuery = await queryAccessesCounts(start_date, end_date);
 
         if(resultQuery.success){
             return res.status(200).json( resultQuery.result.rows );
@@ -123,6 +123,6 @@ module.exports = {
     queryAllAccesses,
     getAllAccesses,
 
-    queryAccessCounts,
-    getAccessCounts,
+    queryAccessesCounts,
+    getAccessesCounts,
 };

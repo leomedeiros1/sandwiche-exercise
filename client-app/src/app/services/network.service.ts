@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
-import { Access } from './models/access.model';
+import { Access, AccessCount } from '../models/access.model';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,16 @@ export class NetworkService {
   configUrl = 'http://localhost:3000';
   // configUrl = process.env.BACKEND_PATH;
 
-  getValues() {
-    console.log("GETTING VALUES")
+  getAllAccesses() {
+    console.log("GETTING ALL ACCESSES")
     return this.http.get<Access[]>(`${this.configUrl}/api/accesses/`);
+  }
+
+  getAccessesCount(startDate: Date | null = null, endDate: Date | null= null) {
+    console.log("GETTING ALL ACCESSES")
+    return this.http.post<AccessCount[]>(`${this.configUrl}/api/accesses/counts`, {startDate, endDate}).pipe(
+      catchError(err => { return this.handleError(err) })
+    );;
   }
 
   private handleError(error: HttpErrorResponse) {
