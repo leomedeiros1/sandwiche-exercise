@@ -15,12 +15,23 @@ async function populateLinks (qtd=8) {
 }
 
 async function populateAccesses (
-    start_date=new Date(new Date().setDate(new Date().getDate() - 30)), 
-    end_date=new Date(), 
+    startDate=null, 
+    endDate=null, 
     links=[]
 ) {
-    console.log("Populating Acesses", start_date, end_date);
-    let _date = new Date(start_date);
+    // Se não for fornecida uma data inicial, defina-a como 30 dias antes de hoje
+    if (!startDate) {
+        startDate = new Date();
+        startDate.setDate(startDate.getDate() - 30);
+    }
+
+    // Se não for fornecida uma data final, defina-a como hoje
+    if (!endDate) {
+        endDate = new Date();
+    }
+    
+    console.log("Populating Acesses", startDate, endDate);
+    let tmpDate = new Date(startDate);
     if(links.length==0){
         links = (await linksController.queryAllLinks()).result.rows.map((e) => e.link_id);
         if(links.length==0){
@@ -30,14 +41,14 @@ async function populateAccesses (
     }
 
     console.log("Links to populate Accesses:", links)
-    while(_date <= end_date){
+    while(tmpDate <= endDate){
         let random_amount = Math.floor(Math.random() * 30)
         for(let i=0; i<random_amount; i++){
             let random_link = links[Math.floor(Math.random() * links.length)]
-            accessesController.queryCreateAccess(random_link, new Date(_date));
+            accessesController.queryCreateAccess(random_link, new Date(tmpDate));
            
         }
 
-        _date.setDate(_date.getDate()+1)
+        tmpDate.setDate(tmpDate.getDate()+1)
     }
 }

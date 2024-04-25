@@ -68,10 +68,61 @@ async function getAllAccesses(req, res) {
     }
 }
 
+async function queryAccessCounts(startDate = null, endDate = null) {
+    // Se não for fornecida uma data inicial, defina-a como 30 dias antes de hoje
+    if (!startDate) {
+        startDate = new Date();
+        startDate.setDate(startDate.getDate() - 30);
+    }
+
+    // Se não for fornecida uma data final, defina-a como hoje
+    if (!endDate) {
+        endDate = new Date();
+    }
+
+    const query = `
+        SELECT 
+            acc.access_date AS access_day,
+            COUNT(*) AS access_count
+        FROM 
+            accesses acc
+        WHERE 
+            acc.access_date >= $1 AND acc.access_date <= $2
+        GROUP BY 
+            access_day
+        ORDER BY 
+            access_day;
+    `;
+
+    return await execQuery(query, [startDate, endDate]);
+}
+
+async function getAccessCounts(req, res) {
+    try {
+        const { start_date, end_date } = req.body;
+
+        const resultQuery = await queryAccessCounts(start_date, end_date);
+
+        if(resultQuery.success){
+            return res.status(200).json( resultQuery.result.rows );
+        } else{
+            console.error('Erro ao obter os acessos agrupados:', resultQuery.message);
+            return res.status(500).json({ message: 'Erro interno do servidor' });
+        }
+    } catch (error) {
+        console.error('Erro ao obter todos os accesses:', error);
+        return res.status(500).json({ message: 'Erro interno do servidor' });
+    }
+}
+
 // Exporte as funções do controller para uso em outros módulos
 module.exports = { 
     queryCreateAccess,
     createAccess, 
+
     queryAllAccesses,
     getAllAccesses,
+
+    queryAccessCounts,
+    getAccessCounts,
 };
