@@ -20,10 +20,17 @@ export class NetworkService {
   }
 
   getAccessesCount(startDate: Date | null = null, endDate: Date | null= null) {
-    console.log("GETTING ALL ACCESSES")
-    return this.http.post<AccessCount[]>(`${this.configUrl}/api/accesses/counts`, {startDate, endDate}).pipe(
+    let body: any = {}
+    if(startDate){
+      body.start_date = startDate.toISOString();
+    }
+    if(endDate){
+      body.end_date = endDate.toISOString();
+    }
+    console.log("GETTING ALL ACCESSES", body)
+    return this.http.post<AccessCount[]>(`${this.configUrl}/api/accesses/counts`, body).pipe(
       catchError(err => { return this.handleError(err) })
-    );;
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

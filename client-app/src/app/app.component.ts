@@ -6,11 +6,15 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { Access, AccessCount } from './models/access.model';
 import {MatCardModule} from '@angular/material/card';
 import { MainChartComponent } from './components/main-chart/main-chart.component';
+import { RightPanelComponent } from './components/right-panel/right-panel.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TopBarComponent, CommonModule, MatCardModule, MainChartComponent],
+  imports: [
+    RouterOutlet, CommonModule, MatCardModule, 
+    MainChartComponent, TopBarComponent, RightPanelComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
