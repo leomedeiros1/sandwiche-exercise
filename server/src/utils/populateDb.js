@@ -7,7 +7,7 @@ module.exports = {
     populateAccesses
 }
 
-async function populateLinks (qtd=8) {
+async function populateLinks (qtd=12) {
     console.log("Populating Links");
     for(let i=0; i<qtd; i++){
         await linksController.queryCreateLink(`generated_link_${i}`);

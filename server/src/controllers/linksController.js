@@ -48,10 +48,52 @@ async function getAllLinks(req, res) {
     }
 }
 
+async function queryMostAccessedLinks(qtdDays = 7) {
+    const query = `
+        SELECT 
+            l.link_name
+            , COUNT(a.access_id) AS accesses_count
+        FROM 
+            links l
+            JOIN accesses a 
+                ON l.link_id = a.access_link_fk
+        WHERE 
+            a.access_date >= CURRENT_DATE - INTERVAL '7 days'
+        GROUP BY 
+            l.link_id, l.link_name
+        ORDER BY 
+            accesses_count DESC;
+    `;
+
+    return await execQuery(query, []);
+}
+
+async function getMostAccessedLinks(req, res) {
+    try {
+        const { qtd_days } = req.body;
+
+        const resultQuery = await queryMostAccessedLinks(qtd_days);
+
+        if(resultQuery.success){
+            return res.status(200).json( resultQuery.result.rows );
+        } else{
+            console.error('Erro ao obter os acessos agrupados:', resultQuery.message);
+            return res.status(500).json({ message: 'Erro interno do servidor' });
+        }
+    } catch (error) {
+        console.error('Erro ao obter todos os accesses:', error);
+        return res.status(500).json({ message: 'Erro interno do servidor' });
+    }
+}
+
 // Exporte as funções do controller para uso em outros módulos
 module.exports = { 
     queryCreateLink,
     queryAllLinks,
+
     createLink, 
-    getAllLinks
+    getAllLinks,
+    
+    queryMostAccessedLinks,
+    getMostAccessedLinks,
 };

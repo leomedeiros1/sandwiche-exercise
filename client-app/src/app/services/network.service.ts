@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { Access, AccessCount } from '../models/access.model';
 import { catchError } from 'rxjs/operators';
+import { LinkCount } from '../models/link.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,14 @@ export class NetworkService {
     }
     console.log("GETTING ALL ACCESSES", body)
     return this.http.post<AccessCount[]>(`${this.configUrl}/api/accesses/counts`, body).pipe(
+      catchError(err => { return this.handleError(err) })
+    );
+  }
+
+  getMostAcessed() {
+    
+    console.log("getMostAcessed", )
+    return this.http.post<LinkCount[]>(`${this.configUrl}/api/links/most_accessed`, {}).pipe(
       catchError(err => { return this.handleError(err) })
     );
   }
