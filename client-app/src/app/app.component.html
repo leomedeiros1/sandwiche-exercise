@@ -1,18 +1,20 @@
 <app-top-bar />
 <div class="main-content">
     <div class="main-panel">
-        <mat-tab-group>
-            <mat-tab label="Acessos por dia">
-                <div class="accesses-per-day">
-                    <app-main-chart />
-                </div>
-            </mat-tab>
-            <mat-tab label="Mais acessados">
-                <div class="most-accssed">
-                    <app-main-table />
-                </div>
-            </mat-tab>
-        </mat-tab-group>
+        <mat-card>
+            <mat-tab-group class="main-tab-group">
+                <mat-tab label="Acessos por dia">
+                    <div class="accesses-per-day">
+                        <app-main-chart />
+                    </div>
+                </mat-tab>
+                <mat-tab label="Mais acessados">
+                    <div class="most-accssed">
+                        <app-main-table />
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
 
     </div>
     <div class="right-panel">

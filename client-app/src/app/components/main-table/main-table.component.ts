@@ -3,11 +3,12 @@ import { LinkCount } from '../../models/link.model';
 import { NetworkService } from '../../services/network.service';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
     selector: 'app-main-table',
     standalone: true,
-    imports: [MatTableModule, MatPaginatorModule],
+    imports: [MatCardModule, MatTableModule, MatPaginatorModule],
     templateUrl: './main-table.component.html',
     styleUrl: './main-table.component.scss'
 })
