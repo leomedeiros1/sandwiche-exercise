@@ -54,6 +54,10 @@
 
 ## Considerações
 
+### Gerais
+
+### Solved issues
+- [x] Ao construir e executar as imagens Docker e criar o banco de dados, é possível que o Node tente subir antes que o DB esteja pronto, causando um erro
+
 ## Known issues
-* Ao construir e executar as imagens Docker e criar o banco de dados, é possível que o Node tente subir antes que o DB esteja pronto, causando um erro
 
