@@ -7,6 +7,7 @@ const linkController = require('../controllers/linksController');
 // Defina as rotas para operações relacionadas a Links
 router.post('/register', linkController.createLink);
 router.post('/most_accessed', linkController.getMostAccessedLinks);
+router.get('/statistics', linkController.getStatistics);
 router.get('/', (req, res) => {
     console.log("Get all links")
     linkController.getAllLinks(req, res)

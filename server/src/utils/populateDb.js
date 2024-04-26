@@ -42,7 +42,7 @@ async function populateAccesses (
 
     console.log("Links to populate Accesses:", links)
     while(tmpDate <= endDate){
-        let random_amount = Math.floor(Math.random() * 30)
+        let random_amount = Math.floor(Math.random() * 80)
         for(let i=0; i<random_amount; i++){
             let random_link = links[Math.floor(Math.random() * links.length)]
             accessesController.queryCreateAccess(random_link, new Date(tmpDate));

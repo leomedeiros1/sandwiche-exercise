@@ -20,6 +20,10 @@ export class NetworkService {
     return this.http.get<Access[]>(`${this.configUrl}/api/accesses/`);
   }
 
+  getStatistics() {
+    return this.http.get<any>(`${this.configUrl}/api/links/statistics`);
+  }
+
   getAccessesCount(startDate: Date | null = null, endDate: Date | null= null) {
     let body: any = {}
     if(startDate){

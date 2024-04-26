@@ -2,6 +2,19 @@
     // padding: 15px;
 }
 
-.example-card {
+.right-panel-card {
     margin-bottom: 20px;
+}
+
+.card-info {
+    font-size: 2em; /* Tamanho inicial da fonte */
+    font-weight: bold; /* Opcional: adicionar negrito */
+    max-width: 90%; /* Definir a largura máxima do texto */
+}
+
+.right-panel-card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
