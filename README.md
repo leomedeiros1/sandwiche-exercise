@@ -30,6 +30,7 @@
 ### API
 
 - [x] Criar uma rota para fornecer dados de acessos diários.
+   * ` localhost:3000/api/accesses/counts ` (POST)[Params: {start_date, end_date}]
 - [x] Os dados devem incluir a data e o número total de acessos naquele dia.
 - [x] Além disso, deve ser possível obter os links mais acessados nos últimos 7 dias.
 
