@@ -35,8 +35,7 @@ export class NetworkService {
   }
 
   getMostAcessed() {
-    
-    console.log("getMostAcessed", )
+    // console.log("getMostAcessed", )
     return this.http.post<LinkCount[]>(`${this.configUrl}/api/links/most_accessed`, {}).pipe(
       catchError(err => { return this.handleError(err) })
     );

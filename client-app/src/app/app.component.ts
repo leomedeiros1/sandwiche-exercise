@@ -5,15 +5,17 @@ import { NetworkService } from './services/network.service';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { Access, AccessCount } from './models/access.model';
 import {MatCardModule} from '@angular/material/card';
+import {MatTabsModule} from '@angular/material/tabs';
 import { MainChartComponent } from './components/main-chart/main-chart.component';
 import { RightPanelComponent } from './components/right-panel/right-panel.component';
+import { MainTableComponent } from './components/main-table/main-table.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet, CommonModule, MatCardModule, 
-    MainChartComponent, TopBarComponent, RightPanelComponent,
+    RouterOutlet, CommonModule, MatCardModule, MatTabsModule,
+    MainChartComponent, TopBarComponent, RightPanelComponent, MainTableComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
