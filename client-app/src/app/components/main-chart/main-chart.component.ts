@@ -87,7 +87,7 @@ export class MainChartComponent {
         if(this.chart.data){
             // console.log("@@@@@@@ updateChart", this.chart.data);
             this.chart.data.labels = this.acessesDataDates.map((each: Date) => {
-                return each.getDate() + "/" + each.getMonth() + "/" + each.getFullYear();
+                return each.getDate() + "/" + (each.getMonth()+1) + "/" + each.getFullYear();
             });
     
             this.chart.data.datasets[0].data = this.acessesDataCounts;
@@ -107,7 +107,8 @@ export class MainChartComponent {
             type: 'line', //this denotes tha type of chart
             data: {// values on X-Axis
                 labels: this.acessesDataDates.map((each: Date) => {
-                    return each.getDate() + "/" + each.getMonth() + "/" + each.getFullYear();
+                    // return each.getDate() + "/" + (each.getMonth()+1) + "/" + each.getFullYear();
+                    return each.getDate() + "/" + (each.getMonth()+1) + "/" + each.getFullYear();
                 }),
                 datasets: [
                     {
