@@ -56,6 +56,20 @@
 
 ### Gerais
 
+### Angular
+* Acredito que este seja o principal ponto carente de melhorias. A interface não é tão visualmente agradável - reflexo da minha falta de habilidades quanto a design - e em sua maioria não é responsiva - certamente precisaria de um tempo maior de dedicação para alcançar uma qualidade aceitável.
+
+### Backend
+
+### Database
+
+### Repositório e Configurações
+* A decisão de usar apenas 1 repositório para ambos os serviços foi principalmente baseada na facilidade de configurar o Docker-compose, além de não se preocupar com outros detalhes. Também foi considerado a falta de necessidade de se preocupar com longo prazo/escalabilidade;
+* Por ser um projeto pequeno e que seria desenvolvido por apenas 1 usuário, decidi por não lidar branchs e politicas de commit (Obviamente seria necessário ser bem definido no caso de um projeto maior);
+   * Além disso, decidido por não se preocupar muito com granularidade dos commits;
+* O tempo entre um commit e outro não necessariamente reflete o tempo real gasto entre os mesmos;
+
+
 ### Solved issues
 - [x] Ao construir e executar as imagens Docker e criar o banco de dados, é possível que o Node tente subir antes que o DB esteja pronto, causando um erro
 
